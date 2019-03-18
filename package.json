@@ -1,0 +1,26 @@
+{
+  "name": "count_money",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start-front": "cd ./frontend && NODE_ENV=production node app.js",
+    "build-front": "cd ./frontend && next build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "blastz",
+  "license": "ISC",
+  "dependencies": {
+    "@material-ui/core": "^3.9.2",
+    "@material-ui/icons": "^3.0.2",
+    "isomorphic-unfetch": "^3.0.0",
+    "koa": "^2.7.0",
+    "koa-body": "^4.1.0",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
+    "next": "^8.0.3",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "react-jss": "^8.6.1"
+  }
+}
