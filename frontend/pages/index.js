@@ -30,7 +30,7 @@ const styles = theme => ({
     width: '100%',
     height: '100%',
     marginTop: 64,
-    padding: 8
+    padding: '8px 16px'
   },
   billContainer: {
     marginTop: 16

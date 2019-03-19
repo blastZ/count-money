@@ -28,7 +28,7 @@ const mockData = [
       {
         type: 'income',
         category: 'salary',
-        value: 3000
+        value: 200
       },
       {
         type: 'expenses',
@@ -55,7 +55,7 @@ const mockData = [
       {
         type: 'income',
         category: 'salary',
-        value: 3000
+        value: 200
       },
       {
         type: 'expenses',

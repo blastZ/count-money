@@ -4,21 +4,22 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import LeftDrawer from '../LeftDrawer';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import SyncIcon from '@material-ui/icons/Sync';
 
 function ButtonAppBar({ classes }) {
   return (
     <div className={classes.root}>
       <AppBar position="fixed">
-        <Toolbar>
-          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-            <MenuIcon />
-          </IconButton>
+        <Toolbar className={classes.toolBar}>
+          <LeftDrawer />
           <Typography variant="h6" color="inherit" className={classes.grow}>
             Count Money
           </Typography>
-          <Button color="inherit">Login</Button>
+          <IconButton color="inherit" aria-label="sync">
+            <SyncIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
     </div>
@@ -28,6 +29,10 @@ function ButtonAppBar({ classes }) {
 const styles = {
   root: {
     flexGrow: 1
+  },
+  toolBar: {
+    paddingLeft: 8,
+    paddingRight: 8
   },
   grow: {
     flexGrow: 1
