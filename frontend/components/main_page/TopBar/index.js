@@ -11,7 +11,7 @@ import SyncIcon from '@material-ui/icons/Sync';
 function ButtonAppBar({ classes }) {
   return (
     <div className={classes.root}>
-      <AppBar position="fixed">
+      <AppBar className={classes.appBar} position="fixed">
         <Toolbar className={classes.toolBar}>
           <LeftDrawer />
           <Typography variant="h6" color="inherit" className={classes.grow}>
@@ -29,6 +29,9 @@ function ButtonAppBar({ classes }) {
 const styles = {
   root: {
     flexGrow: 1
+  },
+  appBar: {
+    color: '#fff'
   },
   toolBar: {
     paddingLeft: 8,
