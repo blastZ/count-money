@@ -12,7 +12,7 @@ import InboxIcon from '@material-ui/icons/Inbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import DayCardTitle from './components/DayCardTitle';
-import BillIcon from './components/BillIcon';
+import BillIcon from '../../common/BillIcon';
 
 const mockData = [
   {
