@@ -5,6 +5,9 @@ import green from '@material-ui/core/colors/green';
 import yellow from '@material-ui/core/colors/yellow';
 import amber from '@material-ui/core/colors/amber';
 import teal from '@material-ui/core/colors/teal';
+import cyan from '@material-ui/core/colors/cyan';
+import blue from '@material-ui/core/colors/blue';
+import orange from '@material-ui/core/colors/orange';
 
 // A theme with custom primary and secondary color.
 // It's optional.
@@ -16,9 +19,9 @@ const theme = createMuiTheme({
       dark: teal[700]
     },
     secondary: {
-      light: yellow[300],
-      main: yellow[600],
-      dark: yellow[700]
+      light: orange[300],
+      main: orange[300],
+      dark: orange[700]
     }
   },
   typography: {

@@ -9,7 +9,7 @@ const AddPage = ({ classes }) => {
     <Grid container>
       <TopBar />
       <Grid className={classes.inputContainer} item>
-        <CalculatorInput />
+        <CalculatorInput height={360} />
       </Grid>
     </Grid>
   );
