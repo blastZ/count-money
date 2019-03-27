@@ -14,6 +14,8 @@ import { dateFormat } from '../../../utils/date';
 const CalculatorInput = ({ classes, height }) => {
   const [value, setValue] = useState(0);
   const [blockHeight, setBlockHeight] = useState(0);
+  const [add, setAdd] = useState(false);
+  const [subtract, setSubtract] = useState(false);
   const date = dateFormat(new Date(), 'M.D');
 
   useEffect(() => {
@@ -30,9 +32,60 @@ const CalculatorInput = ({ classes, height }) => {
 
   const handleDelete = () => {
     if (value.length > 1) {
+      if (value[value.length - 1] === '+') {
+        setAdd(false);
+      }
       setValue(value.slice(0, value.length - 1));
     } else {
       setValue(0);
+    }
+  };
+
+  const handleAdd = () => {
+    if (!add) {
+      setAdd(true);
+      if (subtract) {
+        sumValue('-');
+        setSubtract(false);
+      } else {
+        setValue(`${value}+`);
+      }
+    } else {
+      sumValue('+');
+    }
+  };
+
+  const handleSubtract = () => {
+    if (!subtract) {
+      setSubtract(true);
+      if (add) {
+        sumValue('+');
+        setAdd(false);
+      } else {
+        setValue(`${value}-`);
+      }
+    } else {
+      sumValue('-');
+    }
+  };
+
+  const sumValue = operate => {
+    if (add) {
+      const valueList = value.split('+').filter(o => o);
+      if (valueList.length > 1) {
+        setValue(`${Number(valueList[0]) + Number(valueList[1])}${operate}`);
+      } else {
+        setValue(`${value.slice(0, value.length - 1)}${operate}`);
+      }
+    }
+
+    if (subtract) {
+      const valueList = value.split('-').filter(o => o);
+      if (valueList.length > 1) {
+        setValue(`${Number(valueList[0]) - Number(valueList[1])}${operate}`);
+      } else {
+        setValue(`${value.slice(0, value.length - 1)}${operate}`);
+      }
     }
   };
 
@@ -40,6 +93,26 @@ const CalculatorInput = ({ classes, height }) => {
     if (typeof tag === 'number') {
       return (
         <Button onClick={handleNumber(tag)} variant="contained" color="primary" className={classes.numberButton}>
+          <Typography className={classes.blockContent} variant="h5">
+            {tag}
+          </Typography>
+        </Button>
+      );
+    }
+
+    if (tag === '+') {
+      return (
+        <Button onClick={handleAdd} variant="contained" color="primary" className={classes.numberButton}>
+          <Typography className={classes.blockContent} variant="h5">
+            {tag}
+          </Typography>
+        </Button>
+      );
+    }
+
+    if (tag === '-') {
+      return (
+        <Button onClick={handleSubtract} variant="contained" color="primary" className={classes.numberButton}>
           <Typography className={classes.blockContent} variant="h5">
             {tag}
           </Typography>
