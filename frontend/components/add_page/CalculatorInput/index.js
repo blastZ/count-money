@@ -10,12 +10,14 @@ import CheckIcon from '@material-ui/icons/CheckCircleOutline';
 import BackspaceIcon from '@material-ui/icons/BackspaceOutlined';
 
 import { dateFormat } from '../../../utils/date';
+import useCalculator from './hooks/useCalculator';
 
 const CalculatorInput = ({ classes, height }) => {
-  const [value, setValue] = useState(0);
   const [blockHeight, setBlockHeight] = useState(0);
-  const [add, setAdd] = useState(false);
-  const [subtract, setSubtract] = useState(false);
+  const {
+    state: { value },
+    dispatch
+  } = useCalculator();
   const date = dateFormat(new Date(), 'M.D');
 
   useEffect(() => {
@@ -23,70 +25,22 @@ const CalculatorInput = ({ classes, height }) => {
   }, [height]);
 
   const handleNumber = number => () => {
-    if (String(value).length === 1 && Number(value) === 0) {
-      setValue(number);
-    } else {
-      setValue(pre => `${pre}${number}`);
-    }
+    dispatch({
+      type: 'NUMBER',
+      payload: number
+    });
   };
 
   const handleDelete = () => {
-    if (value.length > 1) {
-      if (value[value.length - 1] === '+') {
-        setAdd(false);
-      }
-      setValue(value.slice(0, value.length - 1));
-    } else {
-      setValue(0);
-    }
+    dispatch({ type: 'DELETE' });
   };
 
   const handleAdd = () => {
-    if (!add) {
-      setAdd(true);
-      if (subtract) {
-        sumValue('-');
-        setSubtract(false);
-      } else {
-        setValue(`${value}+`);
-      }
-    } else {
-      sumValue('+');
-    }
+    dispatch({ type: 'ADD' });
   };
 
   const handleSubtract = () => {
-    if (!subtract) {
-      setSubtract(true);
-      if (add) {
-        sumValue('+');
-        setAdd(false);
-      } else {
-        setValue(`${value}-`);
-      }
-    } else {
-      sumValue('-');
-    }
-  };
-
-  const sumValue = operate => {
-    if (add) {
-      const valueList = value.split('+').filter(o => o);
-      if (valueList.length > 1) {
-        setValue(`${Number(valueList[0]) + Number(valueList[1])}${operate}`);
-      } else {
-        setValue(`${value.slice(0, value.length - 1)}${operate}`);
-      }
-    }
-
-    if (subtract) {
-      const valueList = value.split('-').filter(o => o);
-      if (valueList.length > 1) {
-        setValue(`${Number(valueList[0]) - Number(valueList[1])}${operate}`);
-      } else {
-        setValue(`${value.slice(0, value.length - 1)}${operate}`);
-      }
-    }
+    dispatch({ type: 'SUBTRACT' });
   };
 
   const getButton = tag => {
