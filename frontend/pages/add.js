@@ -2,14 +2,14 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import TopBar from '../components/add_page/TopBar';
-import CalculatorInput from '../components/add_page/CalculatorInput';
+import Calculator from '../components/add_page/Calculator';
 
 const AddPage = ({ classes }) => {
   return (
     <Grid container>
       <TopBar />
       <Grid className={classes.inputContainer} item>
-        <CalculatorInput height={360} />
+        <Calculator height={360} />
       </Grid>
     </Grid>
   );

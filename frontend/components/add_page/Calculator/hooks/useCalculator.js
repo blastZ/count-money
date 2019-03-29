@@ -3,14 +3,19 @@ import { useReducer } from 'react';
 const initState = {
   value: 0,
   add: false,
-  subtract: false
+  subtract: false,
+  equal: false
 };
 
 const sumValue = ({ value, add, subtract }, operate) => {
   if (add) {
     const valueList = value.split('+').filter(o => o);
     if (valueList.length > 1) {
-      return `${Number(valueList[0]) + Number(valueList[1])}${operate}`;
+      if (operate === '=') {
+        return `${Number(valueList[0]) + Number(valueList[1])}`;
+      } else {
+        return `${Number(valueList[0]) + Number(valueList[1])}${operate}`;
+      }
     } else {
       return `${value.slice(0, value.length - 1)}${operate}`;
     }
@@ -19,7 +24,11 @@ const sumValue = ({ value, add, subtract }, operate) => {
   if (subtract) {
     const valueList = value.split('-').filter(o => o);
     if (valueList.length > 1) {
-      return `${Number(valueList[0]) - Number(valueList[1])}${operate}`;
+      if (operate === '=') {
+        return `${Number(valueList[0]) - Number(valueList[1])}`;
+      } else {
+        return `${Number(valueList[0]) - Number(valueList[1])}${operate}`;
+      }
     } else {
       return `${value.slice(0, value.length - 1)}${operate}`;
     }
@@ -39,16 +48,20 @@ const reducer = (state, { type, payload }) => {
       } else {
         return {
           ...state,
+          equal: add || subtract ? true : false,
           value: `${value}${payload}`
         };
       }
     }
     case 'DELETE': {
       if (value.length > 1) {
+        const isAdd = value[value.length - 1] === '+';
+        const isSubtract = value[value.length - 1] === '-';
         return {
           ...state,
-          add: value[value.length - 1] === '+' ? false : state.add,
-          subtract: value[value.length - 1] === '-' ? false : state.subtract,
+          add: isAdd ? false : state.add,
+          subtract: isSubtract ? false : state.subtract,
+          equal: isAdd || isSubtract ? false : state.subtract,
           value: value.slice(0, value.length - 1)
         };
       } else {
@@ -65,6 +78,7 @@ const reducer = (state, { type, payload }) => {
             ...state,
             subtract: true,
             add: false,
+            equal: false,
             value: sumValue(state, '-')
           };
         }
@@ -72,11 +86,13 @@ const reducer = (state, { type, payload }) => {
         return {
           ...state,
           subtract: true,
+          equal: false,
           value: `${value}-`
         };
       } else {
         return {
           ...state,
+          equal: false,
           value: sumValue(state, '-')
         };
       }
@@ -88,6 +104,7 @@ const reducer = (state, { type, payload }) => {
             ...state,
             add: true,
             subtract: false,
+            equal: false,
             value: sumValue(state, '+')
           };
         }
@@ -95,14 +112,25 @@ const reducer = (state, { type, payload }) => {
         return {
           ...state,
           add: true,
+          equal: false,
           value: `${value}+`
         };
       } else {
         return {
           ...state,
+          equal: false,
           value: sumValue(state, '+')
         };
       }
+    }
+    case 'EQUAL': {
+      return {
+        ...state,
+        add: false,
+        subtract: false,
+        equal: false,
+        value: sumValue(state, '=')
+      };
     }
     default:
       return state;
