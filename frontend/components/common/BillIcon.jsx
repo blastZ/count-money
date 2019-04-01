@@ -9,6 +9,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 
 import IconList from './IconList';
+import { Typography } from '@material-ui/core';
 
 const getColor = category => {
   switch (category) {
@@ -25,26 +26,29 @@ const getColor = category => {
   }
 };
 
-const styles = {
-  avatar: {
-    color: '#fff',
-    width: 38,
-    height: 38
-  }
-};
+function BillIcon({ classes, category, styles, active = true, showText = false, onClick, size = 38 }) {
+  const text = category[0].toUpperCase() + category.slice(1);
 
-function BillIcon({ classes, category }) {
   return (
-    <Grid container justify="center" alignItems="center">
+    <Grid container style={styles} justify="center" alignItems="center" direction="column">
       <Avatar
+        onClick={onClick}
         className={classes.avatar}
         style={{
-          backgroundColor: getColor(category)
+          width: size,
+          height: size,
+          backgroundColor: active ? getColor(category) : '#dcdcdc',
+          color: active ? '#fff' : '#525252'
         }}>
         <IconList category={category} />
       </Avatar>
+      {showText && <Typography>{text}</Typography>}
     </Grid>
   );
 }
+
+const styles = {
+  avatar: {}
+};
 
 export default withStyles(styles)(BillIcon);

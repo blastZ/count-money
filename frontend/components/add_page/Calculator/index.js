@@ -83,7 +83,7 @@ const styles = theme => ({
   },
   topContainer: {
     padding: '12px 8px',
-    background: '#e4e4e43b',
+    background: '#f3f3f3',
     borderTop: '0.5px solid #e4e4e4'
   },
   topInput: {
