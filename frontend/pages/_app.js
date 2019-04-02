@@ -5,6 +5,7 @@ import { MuiThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import JssProvider from 'react-jss/lib/JssProvider';
 import getPageContext from '../src/getPageContext';
+import Transition from '../components/app/Transition';
 
 class MyApp extends App {
   constructor() {
@@ -30,9 +31,9 @@ class MyApp extends App {
           <MuiThemeProvider theme={this.pageContext.theme} sheetsManager={this.pageContext.sheetsManager}>
             {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
             <CssBaseline />
-            {/* Pass pageContext to the _document though the renderPage enhancer
-                to render collected styles on server-side. */}
-            <Component pageContext={this.pageContext} {...pageProps} />
+            <Transition>
+              <Component pageContext={this.pageContext} {...pageProps} />
+            </Transition>
           </MuiThemeProvider>
         </JssProvider>
       </Container>
