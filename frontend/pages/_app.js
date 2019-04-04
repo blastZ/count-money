@@ -5,7 +5,6 @@ import { MuiThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import JssProvider from 'react-jss/lib/JssProvider';
 import getPageContext from '../src/getPageContext';
-import Transition from '../components/app/Transition';
 
 class MyApp extends App {
   constructor() {
@@ -21,7 +20,8 @@ class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, router } = this.props;
+    console.log(router.route);
     return (
       <Container>
         <Head>
@@ -29,11 +29,8 @@ class MyApp extends App {
         </Head>
         <JssProvider registry={this.pageContext.sheetsRegistry} generateClassName={this.pageContext.generateClassName}>
           <MuiThemeProvider theme={this.pageContext.theme} sheetsManager={this.pageContext.sheetsManager}>
-            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
             <CssBaseline />
-            <Transition>
-              <Component pageContext={this.pageContext} {...pageProps} />
-            </Transition>
+            <Component pageContext={this.pageContext} {...pageProps} />
           </MuiThemeProvider>
         </JssProvider>
       </Container>

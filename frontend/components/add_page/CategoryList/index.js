@@ -5,12 +5,13 @@ import { withStyles } from '@material-ui/core/styles';
 import expensesUtil from '../../../utils/expenses';
 import BillIcon from '../../common/BillIcon';
 
-const CategoryList = ({ type, classes }) => {
+const CategoryList = ({ type, classes, handleCalculator }) => {
   const [category, setCategory] = useState(null);
   const expensesList = expensesUtil.getCategoryGrid();
 
   const handleClick = category => () => {
     setCategory(category);
+    handleCalculator();
   };
 
   if (type === 'expenses') {

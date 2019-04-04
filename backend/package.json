@@ -1,0 +1,16 @@
+{
+  "name": "count-money-backend",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "author": "blastz",
+  "license": "ISC",
+  "dependencies": {
+    "@sailshq/lodash": "^3.10.3",
+    "sails": "^1.1.0",
+    "sails-hook-orm": "^2.1.1",
+    "sails-hook-sockets": "^1.5.5",
+    "sails-mongo": "^1.0.1"
+  }
+}
