@@ -10,7 +10,7 @@ const Transition = ({ route, children }) => {
   return transitions.map(
     ({ item, key, props }) =>
       item && (
-        <animated.div key={key} style={props}>
+        <animated.div key={key} style={{ ...props }}>
           {children}
         </animated.div>
       )

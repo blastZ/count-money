@@ -8,9 +8,12 @@
   "license": "ISC",
   "dependencies": {
     "@sailshq/lodash": "^3.10.3",
+    "bcrypt": "^3.0.5",
+    "jsonwebtoken": "^8.5.1",
     "sails": "^1.1.0",
     "sails-hook-orm": "^2.1.1",
     "sails-hook-sockets": "^1.5.5",
-    "sails-mongo": "^1.0.1"
+    "sails-mongo": "^1.0.1",
+    "shelljs": "^0.8.3"
   }
 }

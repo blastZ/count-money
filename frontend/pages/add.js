@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import TopBar from '../components/add_page/TopBar';
@@ -8,6 +8,7 @@ import { useTransition, animated, config } from 'react-spring';
 
 const AddPage = ({ classes }) => {
   const [showCalculator, setShowCalculator] = useState(false);
+
   const transitions = useTransition(showCalculator, null, {
     from: { transform: 'translateY(360px)' },
     enter: { transform: 'translateY(0)' },
