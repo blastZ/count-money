@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import { Input, Button } from '@material-ui/core';
@@ -9,8 +9,14 @@ import Router from 'next/router';
 import TopBar from '../components/main_page/TopBar';
 import InfoCard from '../components/main_page/InfoCard';
 import BillList from '../components/main_page/BillList';
+import { Context } from '../reducers';
 
 const HomePage = ({ classes }) => {
+  const {
+    state: { appState: state },
+    dispatch: { appDispatch: dispatch }
+  } = useContext(Context);
+
   return (
     <Fragment>
       <TopBar />

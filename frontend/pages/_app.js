@@ -6,6 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import JssProvider from 'react-jss/lib/JssProvider';
 import getPageContext from '../src/getPageContext';
 import Transition from '../components/app/Transition';
+import Provider from '../reducers';
 
 class MyApp extends App {
   constructor() {
@@ -28,14 +29,16 @@ class MyApp extends App {
         <Head>
           <title>Count Money</title>
         </Head>
-        <JssProvider registry={this.pageContext.sheetsRegistry} generateClassName={this.pageContext.generateClassName}>
-          <MuiThemeProvider theme={this.pageContext.theme} sheetsManager={this.pageContext.sheetsManager}>
-            <CssBaseline />
-            {/* <Transition route={router.route}> */}
-            <Component pageContext={this.pageContext} {...pageProps} />
-            {/* </Transition> */}
-          </MuiThemeProvider>
-        </JssProvider>
+        <Provider>
+          <JssProvider registry={this.pageContext.sheetsRegistry} generateClassName={this.pageContext.generateClassName}>
+            <MuiThemeProvider theme={this.pageContext.theme} sheetsManager={this.pageContext.sheetsManager}>
+              <CssBaseline />
+              {/* <Transition route={router.route}> */}
+              <Component pageContext={this.pageContext} {...pageProps} />
+              {/* </Transition> */}
+            </MuiThemeProvider>
+          </JssProvider>
+        </Provider>
       </Container>
     );
   }

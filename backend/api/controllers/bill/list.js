@@ -1,3 +1,18 @@
 module.exports = async (req, res) => {
-  return res.ok();
+  try {
+    const { userId } = req.userInfo;
+    console.log(userId);
+    const list = await Bill.find({
+      where: {
+        userId,
+        deleted: false
+      }
+    });
+
+    return res.ok(list);
+  } catch (err) {
+    console.error('bill.list: list failed');
+    console.log(err);
+    return res.ok(null, 'Get Bill List Failed');
+  }
 };

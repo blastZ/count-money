@@ -1,4 +1,5 @@
 module.exports.policies = {
   '*': 'isLogin',
-  'user/login': true
+  'user/login': true,
+  'user/add': true
 };
