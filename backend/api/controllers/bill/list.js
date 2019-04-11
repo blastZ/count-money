@@ -1,7 +1,6 @@
 module.exports = async (req, res) => {
   try {
     const { userId } = req.userInfo;
-    console.log(userId);
     const list = await Bill.find({
       where: {
         userId,
