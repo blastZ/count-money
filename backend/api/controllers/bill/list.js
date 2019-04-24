@@ -5,7 +5,8 @@ module.exports = async (req, res) => {
       where: {
         userId,
         deleted: false
-      }
+      },
+      select: ['id', 'type', 'category', 'value', 'createdAt']
     });
 
     return res.ok(list);

@@ -1,5 +1,5 @@
 module.exports.models = {
-  // schema: true,
+  schema: true,
   migrate: 'safe',
   attributes: {},
   dataEncryptionKeys: {

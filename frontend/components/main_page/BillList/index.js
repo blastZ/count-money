@@ -14,67 +14,10 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import DayCardTitle from './components/DayCardTitle';
 import BillIcon from '../../common/BillIcon';
 
-const mockData = [
-  {
-    year: 2019,
-    month: 2,
-    day: 32,
-    data: [
-      {
-        type: 'expenses',
-        category: 'food',
-        value: 200
-      },
-      {
-        type: 'income',
-        category: 'salary',
-        value: 200
-      },
-      {
-        type: 'expenses',
-        category: 'transport',
-        value: 100
-      },
-      {
-        type: 'expenses',
-        category: 'game',
-        value: 200
-      }
-    ]
-  },
-  {
-    year: 2019,
-    month: 3,
-    day: 18,
-    data: [
-      {
-        type: 'expenses',
-        category: 'movie',
-        value: 200
-      },
-      {
-        type: 'income',
-        category: 'salary',
-        value: 200
-      },
-      {
-        type: 'expenses',
-        category: 'drink',
-        value: 100
-      },
-      {
-        type: 'expenses',
-        category: 'game',
-        value: 200
-      }
-    ]
-  }
-];
-
-const BillList = ({ classes }) => {
+const BillList = ({ classes, data }) => {
   return (
     <Grid container direction="column">
-      {mockData
+      {data
         .sort((a, b) => b.day - a.day)
         .map((day, index) => (
           <Grid key={index} item className={classes.billCardContainer}>

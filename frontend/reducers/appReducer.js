@@ -9,9 +9,11 @@ const reducer = (state, { type, payload }) => {
     case 'GET_BILL_LIST': {
       return {
         ...state,
-        billList: []
+        billList: payload
       };
     }
+    default:
+      return state;
   }
 };
 
