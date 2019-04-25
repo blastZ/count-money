@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -6,27 +6,32 @@ import Button from '@material-ui/core/Button';
 import BillIcon from '../../common/BillIcon';
 import InputBase from '@material-ui/core/InputBase';
 
-import useCalculator from './hooks/useCalculator';
 import NumberButton from './components/NumberButton';
 import AddButton from './components/AddButton';
 import SubtractButton from './components/SubtractButton';
 import DeleteButton from './components/DeleteButton';
 import CheckButton from './components/CheckButton';
 import DateButton from './components/DateButton';
+import { Context } from '../../../reducers';
 
 const CalculatorInput = ({ classes, height }) => {
   const [blockHeight, setBlockHeight] = useState(0);
   const {
-    state: { value, equal },
-    dispatch
-  } = useCalculator();
+    state: { addState },
+    dispatch: { addDispatch }
+  } = useContext(Context);
+  const {
+    type,
+    category,
+    calculator: { info, value, equal }
+  } = addState;
 
   useEffect(() => {
     setBlockHeight(height / 4);
   }, [height]);
 
   const getButton = tag => {
-    const props = { tag, classes, dispatch };
+    const props = { tag, classes, addDispatch };
 
     if (typeof tag === 'number' || tag === '.') return <NumberButton {...props} />;
 
@@ -34,7 +39,7 @@ const CalculatorInput = ({ classes, height }) => {
     if (tag === '-') return <SubtractButton {...props} />;
 
     if (tag === 'delete') return <DeleteButton {...props} />;
-    if (tag === 'check') return <CheckButton equal={equal} {...props} />;
+    if (tag === 'check') return <CheckButton type={type} category={category} value={value} info={info} equal={equal} {...props} />;
     if (tag === 'date') return <DateButton {...props} />;
   };
 

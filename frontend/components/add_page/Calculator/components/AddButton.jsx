@@ -1,9 +1,9 @@
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-const AddButton = ({ dispatch, classes }) => {
+const AddButton = ({ addDispatch, classes }) => {
   const handleAdd = () => {
-    dispatch({ type: 'ADD' });
+    addDispatch({ type: 'CALCULATOR_ADD' });
   };
 
   return (

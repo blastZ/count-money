@@ -2,9 +2,9 @@ import Button from '@material-ui/core/Button';
 import BackspaceIcon from '@material-ui/icons/BackspaceOutlined';
 import Grid from '@material-ui/core/Grid';
 
-const DeleteButton = ({ dispatch, classes }) => {
+const DeleteButton = ({ classes, addDispatch }) => {
   const handleDelete = () => {
-    dispatch({ type: 'DELETE' });
+    addDispatch({ type: 'CALCULATOR_DELETE' });
   };
 
   return (

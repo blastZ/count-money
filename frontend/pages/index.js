@@ -37,12 +37,11 @@ const HomePage = ({ classes }) => {
             if (result[date]) {
               result[date].push(current);
             } else {
-              result[date] = [];
+              result[date] = [current];
             }
 
             return result;
           }, {});
-
         data = Object.keys(tempData).map(key => ({
           year: key.split('-')[0],
           month: key.split('-')[1],

@@ -1,16 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 
+import { Context } from '../../../reducers';
 import expensesUtil from '../../../utils/expenses';
 import BillIcon from '../../common/BillIcon';
 
 const CategoryList = ({ type, classes, handleCalculator }) => {
-  const [category, setCategory] = useState(null);
   const expensesList = expensesUtil.getCategoryGrid();
+  const {
+    state: { addState },
+    dispatch: { addDispatch }
+  } = useContext(Context);
+
+  const { category } = addState;
 
   const handleClick = category => () => {
-    setCategory(category);
+    addDispatch({
+      type: 'SET_CATEGORY',
+      payload: category
+    });
     handleCalculator();
   };
 
