@@ -4,9 +4,11 @@ import Head from 'next/head';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import JssProvider from 'react-jss/lib/JssProvider';
-import getPageContext from '../src/getPageContext';
-import Transition from '../components/app/Transition';
+import DayJSUtils from '@date-io/dayjs';
+import { MuiPickersUtilsProvider } from 'material-ui-pickers';
+
 import Provider from '../reducers';
+import getPageContext from '../src/getPageContext';
 
 class MyApp extends App {
   constructor() {
@@ -33,9 +35,9 @@ class MyApp extends App {
           <JssProvider registry={this.pageContext.sheetsRegistry} generateClassName={this.pageContext.generateClassName}>
             <MuiThemeProvider theme={this.pageContext.theme} sheetsManager={this.pageContext.sheetsManager}>
               <CssBaseline />
-              {/* <Transition route={router.route}> */}
-              <Component pageContext={this.pageContext} {...pageProps} />
-              {/* </Transition> */}
+              <MuiPickersUtilsProvider utils={DayJSUtils}>
+                <Component pageContext={this.pageContext} {...pageProps} />
+              </MuiPickersUtilsProvider>
             </MuiThemeProvider>
           </JssProvider>
         </Provider>

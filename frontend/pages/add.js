@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import TopBar from '../components/add_page/TopBar';
@@ -6,8 +6,20 @@ import Calculator from '../components/add_page/Calculator';
 import CategoryList from '../components/add_page/CategoryList';
 import { useTransition, animated, config } from 'react-spring';
 
+import { Context } from '../reducers';
+
 const AddPage = ({ classes }) => {
   const [showCalculator, setShowCalculator] = useState(false);
+  const {
+    state: { addState },
+    dispatch: { addDispatch }
+  } = useContext(Context);
+
+  useEffect(() => {
+    addDispatch({
+      type: 'INIT'
+    });
+  }, []);
 
   const transitions = useTransition(showCalculator, null, {
     from: { transform: 'translateY(360px)' },

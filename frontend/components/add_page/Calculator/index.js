@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, Fragment, useCallback, useRef } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -13,9 +13,12 @@ import DeleteButton from './components/DeleteButton';
 import CheckButton from './components/CheckButton';
 import DateButton from './components/DateButton';
 import { Context } from '../../../reducers';
+import DatePicker from './components/DatePicker';
 
 const CalculatorInput = ({ classes, height }) => {
   const [blockHeight, setBlockHeight] = useState(0);
+  const [date, setDate] = useState(new Date());
+  const datePicker = useRef(null);
   const {
     state: { addState },
     dispatch: { addDispatch }
@@ -26,9 +29,22 @@ const CalculatorInput = ({ classes, height }) => {
     calculator: { info, value, equal }
   } = addState;
 
+  const openDatePicker = useCallback(
+    e => {
+      if (datePicker.current) {
+        datePicker.current.open(e);
+      }
+    },
+    [datePicker.current]
+  );
+
   useEffect(() => {
     setBlockHeight(height / 4);
   }, [height]);
+
+  const handleDate = value => {
+    setDate(new Date(value.$d));
+  };
 
   const getButton = tag => {
     const props = { tag, classes, addDispatch };
@@ -40,45 +56,48 @@ const CalculatorInput = ({ classes, height }) => {
 
     if (tag === 'delete') return <DeleteButton {...props} />;
     if (tag === 'check') return <CheckButton type={type} category={category} value={value} info={info} equal={equal} {...props} />;
-    if (tag === 'date') return <DateButton {...props} />;
+    if (tag === 'date') return <DateButton date={date} handleOpen={openDatePicker} {...props} />;
   };
 
   return (
-    <Grid className={classes.container} container direction="column">
-      <Grid className={classes.topContainer} container alignItems="center" justify="space-between">
-        <Grid className={classes.topIcon} item>
-          <BillIcon category="food" />
+    <Fragment>
+      <DatePicker datePickerRef={datePicker} date={date} onChange={handleDate} />
+      <Grid className={classes.container} container direction="column">
+        <Grid className={classes.topContainer} container alignItems="center" justify="space-between">
+          <Grid className={classes.topIcon} item>
+            <BillIcon category="food" />
+          </Grid>
+          <Grid className={classes.topInput} item>
+            <InputBase className={classes.topInputInput} placeholder="Memo" />
+          </Grid>
+          <Grid className={classes.topValue} item>
+            <Typography variant="h4">{value}</Typography>
+          </Grid>
         </Grid>
-        <Grid className={classes.topInput} item>
-          <InputBase className={classes.topInputInput} placeholder="Memo" />
-        </Grid>
-        <Grid className={classes.topValue} item>
-          <Typography variant="h4">{value}</Typography>
+        <Grid
+          className={classes.bottomContainer}
+          style={{
+            height
+          }}
+          container>
+          {[7, 8, 9, 'date', 4, 5, 6, '+', 1, 2, 3, '-', '.', 0, 'delete', 'check'].map((o, index) => {
+            return (
+              <Grid
+                className={classes.blockContainer}
+                key={index}
+                container
+                justify="center"
+                alignItems="center"
+                style={{
+                  height: blockHeight
+                }}>
+                {getButton(o)}
+              </Grid>
+            );
+          })}
         </Grid>
       </Grid>
-      <Grid
-        className={classes.bottomContainer}
-        style={{
-          height
-        }}
-        container>
-        {[7, 8, 9, 'date', 4, 5, 6, '+', 1, 2, 3, '-', '.', 0, 'delete', 'check'].map((o, index) => {
-          return (
-            <Grid
-              className={classes.blockContainer}
-              key={index}
-              container
-              justify="center"
-              alignItems="center"
-              style={{
-                height: blockHeight
-              }}>
-              {getButton(o)}
-            </Grid>
-          );
-        })}
-      </Grid>
-    </Grid>
+    </Fragment>
   );
 };
 

@@ -46,6 +46,9 @@ const reducer = (state, { type, payload }) => {
   } = state;
 
   switch (type) {
+    case 'INIT': {
+      return initState;
+    }
     case 'SET_CATEGORY': {
       return {
         ...state,
