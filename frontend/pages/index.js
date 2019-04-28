@@ -42,6 +42,7 @@ const HomePage = ({ classes }) => {
 
             return result;
           }, {});
+
         data = Object.keys(tempData).map(key => ({
           year: key.split('-')[0],
           month: key.split('-')[1],
@@ -50,6 +51,7 @@ const HomePage = ({ classes }) => {
             id: o.id,
             type: o.type,
             category: o.category,
+            info: o.info,
             value: o.value
           }))
         }));

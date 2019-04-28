@@ -59,6 +59,13 @@ const CalculatorInput = ({ classes, height }) => {
     if (tag === 'date') return <DateButton date={date} handleOpen={openDatePicker} {...props} />;
   };
 
+  const handleInfo = e => {
+    addDispatch({
+      type: 'CALCULATOR_INFO',
+      payload: e.target.value
+    });
+  };
+
   return (
     <Fragment>
       <DatePicker datePickerRef={datePicker} date={date} onChange={handleDate} />
@@ -68,7 +75,7 @@ const CalculatorInput = ({ classes, height }) => {
             <BillIcon category="food" />
           </Grid>
           <Grid className={classes.topInput} item>
-            <InputBase className={classes.topInputInput} placeholder="Memo" />
+            <InputBase value={info} onChange={handleInfo} className={classes.topInputInput} placeholder="Memo" />
           </Grid>
           <Grid className={classes.topValue} item>
             <Typography variant="h4">{value}</Typography>

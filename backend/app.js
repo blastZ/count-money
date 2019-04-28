@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const sails = require('sails');
 const rc = require('sails/accessible/rc');
 console.log(process.cwd());

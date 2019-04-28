@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
         userId,
         deleted: false
       },
-      select: ['id', 'type', 'category', 'value', 'createdAt']
+      select: ['id', 'type', 'category', 'value', 'info', 'createdAt']
     });
 
     return res.ok(list);

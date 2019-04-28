@@ -38,7 +38,7 @@ const DayCard = ({ classes, dayCard }) => (
           <ListItemIcon className={classes.listItemIcon}>
             <BillIcon category={o.category} />
           </ListItemIcon>
-          <ListItemText primary={o.category} />
+          <ListItemText primary={o.info ? o.info : o.category} />
           <ListItemSecondaryAction className={classes.listItemAction}>
             <Typography className={classes.valueText}>{`${o.type === 'income' ? '' : '-'}${o.value}`}</Typography>
           </ListItemSecondaryAction>

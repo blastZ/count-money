@@ -16,8 +16,8 @@ node app.js
 
 Before start backend, you need to init the database first, this app use mongodb to store data.
 
-1. First, execute init file `backend/mongodb/init.mongo` in your mongodb database.
-2. Second, edit `config/CountMoney.json`, change the url to your mondodb database url.
+1. First, create two collections `bill` and `user` in your mongodb database.
+2. Second, edit `/backend/config/datastores.js`, change the url to your mondodb database url.
 
 ```bash
 cd backend

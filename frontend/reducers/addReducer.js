@@ -55,6 +55,15 @@ const reducer = (state, { type, payload }) => {
         category: payload
       };
     }
+    case 'CALCULATOR_INFO': {
+      return {
+        ...state,
+        calculator: {
+          ...state.calculator,
+          info: payload
+        }
+      };
+    }
     case 'CALCULATOR_NUMBER': {
       if (String(value).length === 1 && Number(value) === 0) {
         return {
