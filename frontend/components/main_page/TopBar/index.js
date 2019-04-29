@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import LeftDrawer from '../LeftDrawer';
 import IconButton from '@material-ui/core/IconButton';
 import SyncIcon from '@material-ui/icons/Sync';
+import DateSelector from './components/DateSelector';
 
 function ButtonAppBar({ classes }) {
   return (
@@ -15,7 +16,7 @@ function ButtonAppBar({ classes }) {
         <Toolbar className={classes.toolBar}>
           <LeftDrawer />
           <Typography variant="h6" color="inherit" className={classes.grow}>
-            Count Money
+            <DateSelector />
           </Typography>
           <IconButton color="inherit" aria-label="sync">
             <SyncIcon />
